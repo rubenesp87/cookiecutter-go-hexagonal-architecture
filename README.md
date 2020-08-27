@@ -1,0 +1,1 @@
+# cookiecutter Go Hexagonal Architecture
