@@ -8,7 +8,7 @@ import (
 // Usecases represent the user business logic
 type Usecases interface {
 	CreateUser(name, surname, email string, age int) error
-	DeleteUser(id string) (int64, error)
+	DeleteUser(id string) error
 	GetUser(id string) (*entities.User, error)
 }
 
@@ -28,7 +28,7 @@ func (uu userUsecase) CreateUser(name, surname, email string, age int) error {
 	return uu.userRepository.Create(user)
 }
 
-func (uu userUsecase) DeleteUser(id string) (int64, error) {
+func (uu userUsecase) DeleteUser(id string) error {
 	return uu.userRepository.Delete(id)
 }
 

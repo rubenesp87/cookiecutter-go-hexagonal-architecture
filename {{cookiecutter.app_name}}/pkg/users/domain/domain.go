@@ -10,7 +10,7 @@ import (
 // Repository common functions to all repositories
 type Repository interface {
 	Create(user *entities.User) error
-	Delete(id string) (int64, error)
+	Delete(id string) error
 	Get(id string) (*entities.User, error)
 }
 
