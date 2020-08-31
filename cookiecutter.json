@@ -4,5 +4,7 @@
     "app_name": "myhexapp",
     "version": "0.0.1",
     "project_description": "A Golang project using hexagonal architecture.",
+    "use_echo_api": "y",
+    "use_inmemory_storage": "y",
     "use_git": "y"
 }

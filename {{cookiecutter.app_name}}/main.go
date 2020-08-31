@@ -9,16 +9,18 @@ import (
 )
 
 func main() {
-	// {% if cookiecutter.use_cobra_cmd == "y" %}
 	fmt.Println("Hola papi")
-	// {% else %}
-	// fmt.Println("Hola mami")
-	// {% endif %}
 
+	// {% if cookiecutter.use_inmemory_storage == "y" %}
 	repo := inmemory.NewInMemoryStorage()
+	// {% else %}
+	// {% endif %}
 
 	usecases := application.NewUserUsecase(repo)
 
+	// {% if cookiecutter.use_echo_api == "y" %}
 	e := handlers.NewEchoServer(usecases)
 	e.Logger.Fatal(e.Start(":8080"))
+	// {% else %}
+	// {% endif %}
 }

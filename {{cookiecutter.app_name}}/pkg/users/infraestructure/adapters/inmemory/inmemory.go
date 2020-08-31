@@ -1,6 +1,8 @@
 package inmemory
 
 import (
+	"fmt"
+
 	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/domain/entities"
 )
 
@@ -15,9 +17,9 @@ func NewInMemoryStorage() *UserAdapter {
 }
 
 // Create inmemory user
-func (ua *UserAdapter) Create(user *entities.User) error {
+func (ua *UserAdapter) Create(user *entities.User) (*entities.User, error) {
 	ua.User = user
-	return nil
+	return user, nil
 }
 
 // Delete inmemory user
@@ -28,5 +30,8 @@ func (ua *UserAdapter) Delete(id string) error {
 
 // Get inmemory user
 func (ua *UserAdapter) Get(id string) (*entities.User, error) {
+	if ua.User == nil || ua.User.ID != id {
+		return &entities.User{}, fmt.Errorf("User not found")
+	}
 	return ua.User, nil
 }

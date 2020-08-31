@@ -50,12 +50,19 @@ func (h *APIHandler) CreateUser(c echo.Context) error {
 		return ErrCreatingUser
 	}
 
-	if err := h.Usecases.CreateUser(req.Name, req.Surname, req.Email, req.Age); err != nil {
+	user, err := h.Usecases.CreateUser(req.Name, req.Surname, req.Email, req.Age)
+	if err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 		return ErrCreatingUser
 	}
 
-	return c.String(http.StatusOK, "User Created")
+	userData, err := json.Marshal(user)
+	if err != nil {
+		c.String(http.StatusInternalServerError, err.Error())
+		return ErrGettingUser
+	}
+
+	return c.String(http.StatusOK, string(userData))
 }
 
 // GetUser echo handler

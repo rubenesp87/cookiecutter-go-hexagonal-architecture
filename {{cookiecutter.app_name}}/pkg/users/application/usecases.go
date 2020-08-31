@@ -7,7 +7,7 @@ import (
 
 // Usecases represent the user business logic
 type Usecases interface {
-	CreateUser(name, surname, email string, age int) error
+	CreateUser(name, surname, email string, age int) (*entities.User, error)
 	DeleteUser(id string) error
 	GetUser(id string) (*entities.User, error)
 }
@@ -23,7 +23,7 @@ func NewUserUsecase(ur domain.Repository) Usecases {
 	}
 }
 
-func (uu userUsecase) CreateUser(name, surname, email string, age int) error {
+func (uu userUsecase) CreateUser(name, surname, email string, age int) (*entities.User, error) {
 	user := domain.NewUser(name, surname, email, age)
 	return uu.userRepository.Create(user)
 }
