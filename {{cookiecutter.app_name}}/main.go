@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/application"
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/infraestructure/adapters/inmemory"
+	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/infrastructure/adapters/inmemory"
 	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/interfaces/handlers"
 )
 

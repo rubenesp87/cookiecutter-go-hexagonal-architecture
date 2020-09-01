@@ -35,7 +35,22 @@ func TestNewUser(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
 			got := domain.NewUser(test.Name, test.Surname, test.Email, test.Age)
-			if *got != *test.Expected {
+			if got.ID == "" {
+				t.Errorf("Expected: %v, got: %v", test.Expected, got)
+			}
+			if got.Name != test.Expected.Name {
+				t.Errorf("Expected: %v, got: %v", test.Expected, got)
+			}
+			if got.Surname != test.Expected.Surname {
+				t.Errorf("Expected: %v, got: %v", test.Expected, got)
+			}
+			if got.Username != test.Expected.Username {
+				t.Errorf("Expected: %v, got: %v", test.Expected, got)
+			}
+			if got.Email != test.Expected.Email {
+				t.Errorf("Expected: %v, got: %v", test.Expected, got)
+			}
+			if got.Age != test.Expected.Age {
 				t.Errorf("Expected: %v, got: %v", test.Expected, got)
 			}
 		})

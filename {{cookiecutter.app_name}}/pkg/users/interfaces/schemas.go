@@ -1,5 +1,6 @@
 package interfaces
 
+// CreateUserRequest echo struct
 type CreateUserRequest struct {
 	Name    string `json:"name" validate:"required"`
 	Surname string `json:"surname" validate:"required"`

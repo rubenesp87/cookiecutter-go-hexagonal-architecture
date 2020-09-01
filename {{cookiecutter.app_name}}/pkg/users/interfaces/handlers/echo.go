@@ -62,7 +62,7 @@ func (h *APIHandler) CreateUser(c echo.Context) error {
 		return ErrGettingUser
 	}
 
-	return c.String(http.StatusOK, string(userData))
+	return c.String(http.StatusOK, fmt.Sprintf("User: %v", string(userData)))
 }
 
 // GetUser echo handler
@@ -79,7 +79,7 @@ func (h *APIHandler) GetUser(c echo.Context) error {
 		return ErrGettingUser
 	}
 
-	return c.String(http.StatusOK, string(userData))
+	return c.String(http.StatusOK, fmt.Sprintf("User: %v", string(userData)))
 }
 
 // DeleteUser echo handler

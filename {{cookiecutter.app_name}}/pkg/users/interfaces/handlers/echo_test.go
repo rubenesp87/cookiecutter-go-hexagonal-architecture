@@ -16,8 +16,8 @@ type MockUseCases struct {
 	Error error
 }
 
-func (m MockUseCases) CreateUser(name, surname, email string, age int) error {
-	return m.Error
+func (m MockUseCases) CreateUser(name, surname, email string, age int) (*entities.User, error) {
+	return &entities.User{}, m.Error
 }
 
 func (m MockUseCases) GetUser(id string) (*entities.User, error) {
@@ -137,22 +137,19 @@ func TestGetUser(t *testing.T) {
 func TestDeleteUser(t *testing.T) {
 	tests := []struct {
 		TestName      string
-		Key           string
-		DeleteValue   int64
+		ID            string
 		Error         error
 		ExpectedError error
 	}{
 		{
 			TestName:      "Test Delete user OK",
-			Key:           "existing_key",
-			DeleteValue:   1,
+			ID:            "existing_id",
 			Error:         nil,
 			ExpectedError: nil,
 		},
 		{
 			TestName:      "Test Delete user KO",
-			Key:           "non_existing_key",
-			DeleteValue:   1,
+			ID:            "non_existing_id",
 			Error:         fmt.Errorf("error"),
 			ExpectedError: ErrDeletingUser,
 		},
@@ -161,7 +158,7 @@ func TestDeleteUser(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
 			e := echo.New()
-			req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/users/%v", test.Key), strings.NewReader(""))
+			req := httptest.NewRequest(http.MethodDelete, fmt.Sprintf("/users/%v", test.ID), strings.NewReader(""))
 			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 			rec := httptest.NewRecorder()
 			c := e.NewContext(req, rec)
