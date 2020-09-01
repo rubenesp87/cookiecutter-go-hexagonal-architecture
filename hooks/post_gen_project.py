@@ -1,6 +1,5 @@
 from __future__ import print_function
 import os
-import shutil
 from subprocess import Popen
 
 # Get the root project directory
@@ -20,10 +19,8 @@ def remove_echo_files():
     """
     Removes files needed for echo API Rest
     """
-    shutil.rmtree(
-        os.path.join(PROJECT_DIRECTORY, "pkg/users/interfaces/handlers/echo.go")
-    )
-    shutil.rmtree(
+    os.remove(os.path.join(PROJECT_DIRECTORY, "pkg/users/interfaces/handlers/echo.go"))
+    os.remove(
         os.path.join(PROJECT_DIRECTORY, "pkg/users/interfaces/handlers/echo_test.go")
     )
 
@@ -32,12 +29,12 @@ def remove_inmemory_files():
     """
     Removes files needed for inMemory storage
     """
-    shutil.rmtree(
+    os.remove(
         os.path.join(
             PROJECT_DIRECTORY, "pkg/users/infrastructure/adapters/inmemory/inmemory.go"
         )
     )
-    shutil.rmtree(
+    os.remove(
         os.path.join(
             PROJECT_DIRECTORY,
             "pkg/users/infrastructure/adapters/inmemory/inmemory_test.go",
