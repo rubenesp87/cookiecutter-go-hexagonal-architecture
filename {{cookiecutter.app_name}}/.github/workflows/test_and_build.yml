@@ -9,7 +9,7 @@ jobs:
     name: Test and build
     strategy:
       matrix:
-        go-version: [1.x.x]
+        go-version: [1.14.x]
         platform: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:
@@ -35,6 +35,7 @@ jobs:
     - name: Run lint
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        go get -u golang.org/x/lint/golint
         make lint
     - name: Run tests
       run: |
@@ -43,4 +44,9 @@ jobs:
     - name: Get dependencies and Build
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure
+        fi
         make build
