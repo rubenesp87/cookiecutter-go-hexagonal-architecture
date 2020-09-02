@@ -1,9 +1,14 @@
 # cookiecutter Go Hexagonal Architecture
 
-## Install
+## Installation
 
+### Mac
 ```console
 $ brew install cookiecutter
+```
+### Ubuntu
+```console
+$ sudo apt-get install -y cookiecutter
 ```
 
 ```console
