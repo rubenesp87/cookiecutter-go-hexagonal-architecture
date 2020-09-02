@@ -2,6 +2,7 @@ package domain_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/posts/domain"
 	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/posts/domain/entities"
@@ -11,28 +12,32 @@ func TestNewPost(t *testing.T) {
 	tests := []struct {
 		TestName string
 		Content  string
-		Date     string
 		UserID   string
 		Expected *entities.Post
 	}{
 		{
-			"Test create post",
-			"Mi first post",
-			"XX/XX/XXXX",
-			"",
+			"Test new post",
+			"My first post",
+			"1234",
 			&entities.Post{
-				Content: "Mi first post",
-				Date:    "XX/XX/XXXX",
-				UserID:  "",
+				Content: "My first post",
+				Date:    time.Now(),
+				UserID:  "1234",
 			},
 		},
 	}
 
 	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
-			got := domain.NewPost(test.Content, test.Date)
-			if *got != *test.Expected {
-				t.Errorf("Expected: %v, got: %v", test.Expected, got)
+			got := domain.NewPost(test.Content, test.UserID)
+			if got.ID == "" {
+				t.Errorf("Expected: %v, got: %v", test.Expected.ID, got.ID)
+			}
+			if got.Content != test.Expected.Content {
+				t.Errorf("Expected: %v, got: %v", test.Expected.Content, got.Content)
+			}
+			if got.UserID != test.Expected.UserID {
+				t.Errorf("Expected: %v, got: %v", test.Expected.UserID, got.UserID)
 			}
 		})
 	}

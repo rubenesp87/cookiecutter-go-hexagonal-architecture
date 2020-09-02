@@ -1,22 +1,25 @@
 package domain
 
 import (
+	"time"
+
+	"github.com/google/uuid"
 	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/posts/domain/entities"
 )
 
 // Repository common functions to all repositories
 type Repository interface {
-	Create(user *entities.Post) error
-	Delete(id string) (int64, error)
+	Create(post *entities.Post) (*entities.Post, error)
+	Delete(id string) error
 	Get(id string) (*entities.Post, error)
 }
 
 //NewPost returns curated user
-func NewPost(content, date string) *entities.Post {
-
+func NewPost(content, userID string) *entities.Post {
 	return &entities.Post{
+		ID:      uuid.New().String(),
 		Content: content,
-		Date:    date,
-		UserID:  "",
+		Date:    time.Now(),
+		UserID:  userID,
 	}
 }

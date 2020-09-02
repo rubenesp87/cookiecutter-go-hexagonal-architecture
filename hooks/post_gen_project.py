@@ -23,6 +23,10 @@ def remove_echo_files():
     os.remove(
         os.path.join(PROJECT_DIRECTORY, "pkg/users/interfaces/handlers/echo_test.go")
     )
+    os.remove(os.path.join(PROJECT_DIRECTORY, "pkg/posts/interfaces/handlers/echo.go"))
+    os.remove(
+        os.path.join(PROJECT_DIRECTORY, "pkg/posts/interfaces/handlers/echo_test.go")
+    )
 
 
 def remove_inmemory_files():
@@ -31,6 +35,9 @@ def remove_inmemory_files():
     """
     os.rmdir(
         os.path.join(PROJECT_DIRECTORY, "pkg/users/infrastructure/adapters/inmemory")
+    )
+    os.rmdir(
+        os.path.join(PROJECT_DIRECTORY, "pkg/posts/infrastructure/adapters/inmemory")
     )
 
 

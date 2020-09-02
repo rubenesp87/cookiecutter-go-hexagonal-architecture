@@ -91,7 +91,7 @@ func TestGet(t *testing.T) {
 			userAdapter := inmemory.UserAdapter{
 				User: test.User,
 			}
-			user, err := userAdapter.Get("1234")
+			user, err := userAdapter.Get(test.ID)
 			if err != test.ExpectedError {
 				t.Errorf("Expected: %v, got: %v", test.ExpectedError, err)
 			}

@@ -7,8 +7,8 @@ import (
 
 // Usecases represent the user business logic
 type Usecases interface {
-	CreatePost(content, date string) error
-	DeletePost(id string) (int64, error)
+	CreatePost(content, userID string) (*entities.Post, error)
+	DeletePost(id string) error
 	GetPost(id string) (*entities.Post, error)
 }
 
@@ -23,12 +23,12 @@ func NewUserUsecase(ur domain.Repository) Usecases {
 	}
 }
 
-func (pu postUsecase) CreatePost(content, date string) error {
-	post := domain.NewPost(content, date)
+func (pu postUsecase) CreatePost(content, userID string) (*entities.Post, error) {
+	post := domain.NewPost(content, userID)
 	return pu.postRepository.Create(post)
 }
 
-func (pu postUsecase) DeletePost(id string) (int64, error) {
+func (pu postUsecase) DeletePost(id string) error {
 	return pu.postRepository.Delete(id)
 }
 
