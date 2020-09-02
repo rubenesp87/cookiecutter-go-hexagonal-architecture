@@ -41,6 +41,13 @@ def remove_inmemory_files():
     )
 
 
+def remove_ci_ga_files():
+    """
+    Removes files needed for Github Actions CI
+    """
+    os.rmdir(os.path.join(PROJECT_DIRECTORY, ".github"))
+
+
 def init_git():
     """
     Initialises git on the new project folder
@@ -64,7 +71,11 @@ if "{{ cookiecutter.use_echo_api }}".lower() != "y":
 if "{{ cookiecutter.use_inmemory_storage }}".lower() != "y":
     remove_inmemory_files()
 
-# 3. Initialize Git
+# 3. Remove CI Github Actions
+if "{{ cookiecutter.use_ci_github_actions }}".lower() != "y":
+    remove_ci_ga_files()
+
+# 4. Initialize Git
 if "{{ cookiecutter.use_git }}".lower() == "y":
     init_git()
 else:

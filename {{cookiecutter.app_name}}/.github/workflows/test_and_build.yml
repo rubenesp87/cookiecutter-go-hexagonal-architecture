@@ -1,0 +1,46 @@
+on:
+  pull_request:
+    branches:
+      - master
+
+name: Test and build
+jobs:
+  test_and_build:
+    name: Test and build
+    strategy:
+      matrix:
+        go-version: [1.x.x]
+        platform: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - name: Install Go
+      if: success()
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Setup env
+      run: |
+        echo "::set-env name=GOPATH::$(go env GOPATH)"
+        echo "::set-env name=GOBIN::$(go env GOPATH)/bin"
+        echo "::add-path::$(go env GOPATH)/bin"
+      shell: bash
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Create go path
+      run: |
+        mkdir -p $GOPATH/pkg
+        mkdir -p $GOBIN
+        mkdir -p $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        mv ./* $GOPATH/src/github.com/$GITHUB_REPOSITORY
+    - name: Run lint
+      run: |
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        make lint
+    - name: Run tests
+      run: |
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        make test
+    - name: Get dependencies and Build
+      run: |
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        make build

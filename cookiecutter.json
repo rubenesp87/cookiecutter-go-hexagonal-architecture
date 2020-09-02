@@ -6,5 +6,6 @@
     "project_description": "A Golang project using hexagonal architecture.",
     "use_echo_api": "y",
     "use_inmemory_storage": "y",
+    "use_ci_github_actions": "y",
     "use_git": "y"
 }
