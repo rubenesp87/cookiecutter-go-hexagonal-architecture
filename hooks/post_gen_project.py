@@ -29,16 +29,8 @@ def remove_inmemory_files():
     """
     Removes files needed for inMemory storage
     """
-    os.remove(
-        os.path.join(
-            PROJECT_DIRECTORY, "pkg/users/infrastructure/adapters/inmemory/inmemory.go"
-        )
-    )
-    os.remove(
-        os.path.join(
-            PROJECT_DIRECTORY,
-            "pkg/users/infrastructure/adapters/inmemory/inmemory_test.go",
-        )
+    os.rmdir(
+        os.path.join(PROJECT_DIRECTORY, "pkg/users/infrastructure/adapters/inmemory")
     )
 
 
