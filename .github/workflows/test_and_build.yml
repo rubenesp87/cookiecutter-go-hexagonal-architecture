@@ -35,6 +35,7 @@ jobs:
     - name: Run lint
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        go get -u golang.org/x/lint/golint
         make lint
     - name: Run tests
       run: |
