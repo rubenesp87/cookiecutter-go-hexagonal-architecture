@@ -41,13 +41,13 @@ jobs:
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         make test
-    - name: Run tests
-      uses: marsam/codeclimate-action@master
+    - uses: paambaati/codeclimate-action@v2.6.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
-        run: |
-          cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
-        command: go test ./... -coverprofile=c.out --coverageReporters=gocov
-        reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
+        prefix: $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        coverageCommand: go test ./... -coverprofile=c.out
+        coverageLocations: $GOPATH/src/github.com/$GITHUB_REPOSITORY/c.out:gocov
     - name: Get dependencies and Build
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
