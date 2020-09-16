@@ -44,6 +44,8 @@ jobs:
     - name: Run tests
       uses: marsam/codeclimate-action@master
       with:
+        run: |
+          cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         command: go test ./... -coverprofile=c.out --coverageReporters=gocov
         reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
     - name: Get dependencies and Build
