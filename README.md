@@ -1,4 +1,4 @@
-# cookiecutter Go Hexagonal Architecture
+# {{cookiecutter.app_name}}
 
 ## Installation
 

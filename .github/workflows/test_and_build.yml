@@ -9,7 +9,7 @@ jobs:
     name: Test and build
     strategy:
       matrix:
-        go-version: [1.14.x]
+        go-version: [1.x.x]
         platform: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:
@@ -41,6 +41,17 @@ jobs:
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
         make test
+    - name: Send coverage code climate
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      run: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+        go get github.com/jpmonette/apexcov
+        ./cc-test-reporter before-build
+        apexcov
+        ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
+        ./cc-test-reporter upload-coverage
     - name: Get dependencies and Build
       run: |
         cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
