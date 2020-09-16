@@ -45,7 +45,9 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       run: |
-        ls && cd $GOPATH/src/github.com/$GITHUB_REPOSITORY && ls
+        ls
+        cd $GOPATH/src/github.com/$GITHUB_REPOSITORY
+        ls
       with:
         prefix: $GOPATH/src/github.com/$GITHUB_REPOSITORY
         coverageCommand: go test ./... -coverprofile=c.out
