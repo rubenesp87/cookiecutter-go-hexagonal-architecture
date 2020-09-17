@@ -9,15 +9,19 @@ jobs:
     name: Test and build
     strategy:
       matrix:
-        go-version: [1.14.x]
+        go-version: [1.15.x]
         platform: [macos-latest, ubuntu-latest]
+    {% raw %}
     runs-on: ${{ matrix.platform }}
+    {% endraw %}
     steps:
     - name: Install Go
       if: success()
       uses: actions/setup-go@v1
       with:
+        {% raw %}
         go-version: ${{ matrix.go-version }}
+        {% endraw %}
     - name: Setup env
       run: |
         echo "::set-env name=GOPATH::$(go env GOPATH)"
