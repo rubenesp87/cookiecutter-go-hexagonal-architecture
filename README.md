@@ -1,4 +1,5 @@
 # cookiecutter Go Hexagonal Architecture
+Basic application to Create/Get/Delete users and posts using hexagonal architecture
 
 ## Installation
 
