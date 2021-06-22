@@ -76,7 +76,4 @@ if "{{ cookiecutter.use_ci_github_actions }}".lower() != "y":
     remove_ci_ga_files()
 
 # 4. Initialize Git
-if "{{ cookiecutter.use_git }}".lower() == "y":
-    init_git()
-else:
-    remove_file(".gitignore")
+init_git()
