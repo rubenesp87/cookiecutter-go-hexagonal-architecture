@@ -11,4 +11,4 @@ build:
 	go build -o gohex
 
 run:
-	go run main.go
+	go run cmd/main.go

@@ -31,9 +31,6 @@ func NewEchoServer(usecases application.Usecases) *echo.Echo {
 		Usecases: usecases,
 	}
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello ECHO followers")
-	})
 
 	e.POST("/posts/:user_id", handler.CreatePost)
 	e.GET("/posts/:post_id", handler.GetPost)
