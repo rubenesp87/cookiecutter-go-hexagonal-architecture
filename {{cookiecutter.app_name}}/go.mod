@@ -1,6 +1,6 @@
-module github.com/rubenesp87/cookiecutter-go-hexagonal-architecture
+module github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}
 
-go 1.14
+go 1.16
 
 require (
 	github.com/go-playground/universal-translator v0.17.0 // indirect

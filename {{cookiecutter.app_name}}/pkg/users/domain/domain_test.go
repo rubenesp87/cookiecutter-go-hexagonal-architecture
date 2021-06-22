@@ -3,8 +3,8 @@ package domain_test
 import (
 	"testing"
 
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/domain"
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/domain/entities"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/domain"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/domain/entities"
 )
 
 func TestNewUser(t *testing.T) {

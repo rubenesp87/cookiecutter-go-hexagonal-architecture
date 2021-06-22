@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/domain/entities"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/domain/entities"
 )
 
 var errCreatingUser = errors.New("Error creating new User")

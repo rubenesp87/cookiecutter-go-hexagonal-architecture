@@ -3,8 +3,8 @@ package inmemory_test
 import (
 	"testing"
 
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/domain/entities"
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/infrastructure/adapters/inmemory"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/domain/entities"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/infrastructure/adapters/inmemory"
 )
 
 type mockUserAdapter struct {

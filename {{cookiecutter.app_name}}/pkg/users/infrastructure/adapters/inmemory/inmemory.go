@@ -3,7 +3,7 @@ package inmemory
 import (
 	"fmt"
 
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/domain/entities"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/domain/entities"
 )
 
 // UserAdapter ...

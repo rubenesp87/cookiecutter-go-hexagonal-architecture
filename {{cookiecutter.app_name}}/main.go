@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/application"
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/infrastructure/adapters/inmemory"
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/users/interfaces/handlers"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/application"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/infrastructure/adapters/inmemory"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/interfaces/handlers"
 )
 
 func main() {

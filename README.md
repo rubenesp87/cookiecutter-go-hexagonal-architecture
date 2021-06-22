@@ -24,6 +24,7 @@ email [ruben@devaway.io]: ruben@devaway.io
 app_name [myhexapp]: mynewapp
 version [0.0.1]: 0.0.1
 project_description [A Golang project using hexagonal architecture.]: My new Golang app
+github_username : "rubenesp87"
 use_echo_api [y]: y
 use_inmemory_storage [y]: y
 use_ci_github_actions [y]: y

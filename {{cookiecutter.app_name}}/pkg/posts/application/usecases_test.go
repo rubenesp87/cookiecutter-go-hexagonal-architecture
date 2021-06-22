@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/posts/domain/entities"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/posts/domain/entities"
 )
 
 var errCreatingPost = errors.New("Error creating new Post")

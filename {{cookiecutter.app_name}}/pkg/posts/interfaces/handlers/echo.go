@@ -7,8 +7,8 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/posts/application"
-	"github.com/rubenesp87/cookiecutter-go-hexagonal-architecture/pkg/posts/interfaces"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/posts/application"
+	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/posts/interfaces"
 )
 
 // APIHandler ...
