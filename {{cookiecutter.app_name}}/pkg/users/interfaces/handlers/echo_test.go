@@ -7,17 +7,26 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/go-playground/validator"
 	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/users/domain/entities"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 type MockUseCases struct {
 	Error error
 }
 
-func (m MockUseCases) CreateUser(name, surname, email string, age int) (*entities.User, error) {
+func (m MockUseCases) RegisterUser(name, surname, email, password string, age int) (*entities.User, error) {
 	return &entities.User{}, m.Error
+}
+
+func (m MockUseCases) LoginUser(email, password string) (*entities.User, error) {
+	return &entities.User{}, m.Error
+}
+
+func (m MockUseCases) LogoutUser(id string) error {
+	return m.Error
 }
 
 func (m MockUseCases) GetUser(id string) (*entities.User, error) {
@@ -28,13 +37,14 @@ func (m MockUseCases) DeleteUser(id string) error {
 	return m.Error
 }
 
-func TestCreateUser(t *testing.T) {
+func TestRegisterUser(t *testing.T) {
 
 	tests := []struct {
 		TestName      string
 		Name          string
 		Surname       string
 		Email         string
+		Password      string
 		Age           int
 		Error         error
 		ExpectedError error
@@ -44,6 +54,7 @@ func TestCreateUser(t *testing.T) {
 			Name:          "Ruben",
 			Surname:       "Espinosa",
 			Email:         "ruben@devaway.io",
+			Password:      "123456789",
 			Age:           33,
 			Error:         nil,
 			ExpectedError: nil,
@@ -53,6 +64,7 @@ func TestCreateUser(t *testing.T) {
 			Name:          "Anthony",
 			Surname:       "Smith",
 			Email:         "ant@sm.com",
+			Password:      "123456789",
 			Age:           25,
 			Error:         fmt.Errorf("error"),
 			ExpectedError: ErrCreatingUser,
@@ -61,13 +73,15 @@ func TestCreateUser(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
-			body := fmt.Sprintf(`{"name": "%s", "surname": "%s", "email": "%s", "age": %v}`,
+			body := fmt.Sprintf(`{"name": "%s", "surname": "%s", "email": "%s", "password": "%s", "age": %v}`,
 				test.Name,
 				test.Surname,
 				test.Email,
+				test.Password,
 				test.Age,
 			)
 			e := echo.New()
+			e.Validator = &CustomValidator{validator: validator.New()}
 			req := httptest.NewRequest(http.MethodPost, "/users", strings.NewReader(body))
 			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 			rec := httptest.NewRecorder()
@@ -79,7 +93,7 @@ func TestCreateUser(t *testing.T) {
 				},
 			}
 
-			err := fakeHandler.CreateUser(c)
+			err := fakeHandler.RegisterUser(c)
 			if err != test.ExpectedError {
 				t.Errorf("got %v, expected %v", err, test.ExpectedError)
 			}

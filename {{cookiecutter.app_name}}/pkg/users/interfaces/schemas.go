@@ -1,9 +1,16 @@
 package interfaces
 
-// CreateUserRequest echo struct
-type CreateUserRequest struct {
-	Name    string `json:"name" validate:"required"`
-	Surname string `json:"surname" validate:"required"`
-	Email   string `json:"email" validate:"required"`
-	Age     int    `json:"age" validate:"required"`
+// RegisterUserRequest echo struct
+type RegisterUserRequest struct {
+	Name     string `json:"name" validate:"required"`
+	Surname  string `json:"surname"`
+	Email    string `json:"email" validate:"required"`
+	Password string `json:"password" validate:"required"`
+	Age      int    `json:"age"`
+}
+
+// LoginUserRequest echo struct
+type LoginUserRequest struct {
+	Email    string `json:"email" validate:"required"`
+	Password string `json:"password" validate:"required"`
 }

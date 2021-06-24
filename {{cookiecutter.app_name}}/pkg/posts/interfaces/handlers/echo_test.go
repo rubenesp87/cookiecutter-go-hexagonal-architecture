@@ -9,7 +9,7 @@ import (
 
 	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/posts/domain/entities"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 type MockUseCases struct {

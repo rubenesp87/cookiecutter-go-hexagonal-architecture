@@ -28,9 +28,17 @@ func (ua *UserAdapter) Delete(id string) error {
 	return nil
 }
 
-// Get inmemory user
-func (ua *UserAdapter) Get(id string) (*entities.User, error) {
+// GetByID inmemory user
+func (ua *UserAdapter) GetByID(id string) (*entities.User, error) {
 	if ua.User == nil || ua.User.ID != id {
+		return &entities.User{}, fmt.Errorf("User not found")
+	}
+	return ua.User, nil
+}
+
+// GetByEmail inmemory user by email
+func (ua *UserAdapter) GetByEmail(email string) (*entities.User, error) {
+	if ua.User == nil || ua.User.Email != email {
 		return &entities.User{}, fmt.Errorf("User not found")
 	}
 	return ua.User, nil

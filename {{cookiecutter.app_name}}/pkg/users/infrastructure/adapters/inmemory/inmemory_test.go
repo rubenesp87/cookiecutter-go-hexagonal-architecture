@@ -55,7 +55,7 @@ func TestCreate(t *testing.T) {
 	}
 }
 
-func TestGet(t *testing.T) {
+func TestGetByID(t *testing.T) {
 	tests := []struct {
 		TestName      string
 		ID            string
@@ -91,7 +91,7 @@ func TestGet(t *testing.T) {
 			userAdapter := inmemory.UserAdapter{
 				User: test.User,
 			}
-			user, err := userAdapter.Get(test.ID)
+			user, err := userAdapter.GetByID(test.ID)
 			if err != test.ExpectedError {
 				t.Errorf("Expected: %v, got: %v", test.ExpectedError, err)
 			}

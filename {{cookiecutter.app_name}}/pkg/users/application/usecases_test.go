@@ -20,7 +20,11 @@ func (m mockUserRepository) Create(user *entities.User) (*entities.User, error) 
 	return m.User, m.Error
 }
 
-func (m mockUserRepository) Get(id string) (*entities.User, error) {
+func (m mockUserRepository) GetByID(id string) (*entities.User, error) {
+	return m.User, m.Error
+}
+
+func (m mockUserRepository) GetByEmail(email string) (*entities.User, error) {
 	return m.User, m.Error
 }
 
@@ -28,12 +32,13 @@ func (m mockUserRepository) Delete(id string) error {
 	return m.Error
 }
 
-func TestCreateUser(t *testing.T) {
+func TestRegisterUser(t *testing.T) {
 	tests := []struct {
 		TestName      string
 		Name          string
 		Surname       string
 		Email         string
+		Password      string
 		Age           int
 		User          *entities.User
 		Error         error
@@ -44,6 +49,7 @@ func TestCreateUser(t *testing.T) {
 			"Ruben",
 			"Espinosa",
 			"ruben@devaway.io",
+			"123456789",
 			33,
 			&entities.User{
 				ID:       "1234",
@@ -51,6 +57,7 @@ func TestCreateUser(t *testing.T) {
 				Surname:  "Espinosa",
 				Username: "ruben.espinosa",
 				Email:    "ruben@devaway.io",
+				Password: "123456789",
 				Age:      33,
 			},
 			nil,
@@ -61,6 +68,7 @@ func TestCreateUser(t *testing.T) {
 			"Ruben",
 			"Espinosa",
 			"ruben@devaway.io",
+			"123456789",
 			33,
 			&entities.User{},
 			errCreatingUser,
@@ -77,7 +85,7 @@ func TestCreateUser(t *testing.T) {
 					Error: test.Error,
 				},
 			}
-			user, err := fakeUseCases.CreateUser(test.Name, test.Surname, test.Email, test.Age)
+			user, err := fakeUseCases.RegisterUser(test.Name, test.Surname, test.Email, test.Password, test.Age)
 			if err != test.ExpectedError {
 				t.Errorf("Expected: %v, got: %v", test.ExpectedError, err)
 			}

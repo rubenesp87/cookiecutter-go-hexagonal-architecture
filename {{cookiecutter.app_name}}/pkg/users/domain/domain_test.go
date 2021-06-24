@@ -13,6 +13,7 @@ func TestNewUser(t *testing.T) {
 		Name     string
 		Surname  string
 		Email    string
+		Password string
 		Age      int
 		Expected *entities.User
 	}{
@@ -21,12 +22,14 @@ func TestNewUser(t *testing.T) {
 			"Ruben",
 			"Espinosa",
 			"ruben@devaway.io",
+			"123456789",
 			33,
 			&entities.User{
 				Name:     "Ruben",
 				Surname:  "Espinosa",
 				Username: "ruben.espinosa",
 				Email:    "ruben@devaway.io",
+				Password: "$2a$14$FBTgFG/OhAonPtfSe8XApesQsdQPo0x3BLxk2dM9li0anmI2KyUGC",
 				Age:      33,
 			},
 		},
@@ -34,7 +37,7 @@ func TestNewUser(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.TestName, func(t *testing.T) {
-			got := domain.NewUser(test.Name, test.Surname, test.Email, test.Age)
+			got := domain.NewUser(test.Name, test.Surname, test.Email, test.Password, test.Age)
 			if got.ID == "" {
 				t.Errorf("Expected: %v, got: %v", test.Expected.ID, got.ID)
 			}
@@ -49,6 +52,9 @@ func TestNewUser(t *testing.T) {
 			}
 			if got.Email != test.Expected.Email {
 				t.Errorf("Expected: %v, got: %v", test.Expected.Email, got.Email)
+			}
+			if got.Password == test.Expected.Password {
+				t.Errorf("Expected: %v, got: %v", test.Expected.Password, got.Password)
 			}
 			if got.Age != test.Expected.Age {
 				t.Errorf("Expected: %v, got: %v", test.Expected.Age, got.Age)

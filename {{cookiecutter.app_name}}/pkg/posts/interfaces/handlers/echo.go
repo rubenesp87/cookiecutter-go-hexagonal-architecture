@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/posts/application"
 	"github.com/{{cookiecutter.github_username}}/{{cookiecutter.app_name}}/pkg/posts/interfaces"
 )
